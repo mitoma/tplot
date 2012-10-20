@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+# inital setting
+trap(:INT) do
+  exit 0
+end
+
+BASE_DIR = File.expand_path(__FILE__.gsub(%r{/[^/]+\z},'') + "/../")
+plugin_name = ARGV.first.nil? ? "list" : ARGV.first
+
+# plugin check
+unless File.exists?("#{BASE_DIR}/plugins/#{plugin_name}.rb")
+  puts "#{plugin_name} plugin is not found."
+  puts
+  plugin_name = "list"
+end
+
+# load basic module
+require 'curses'
+require "#{BASE_DIR}/lib/tplot"
+require "#{BASE_DIR}/lib/tplot/plugin"
+require "#{BASE_DIR}/lib/tplot/line_chart"
+
+# execute plugin
+require "#{BASE_DIR}/plugins/#{plugin_name}"
+plugin_class = Tplot.const_get(plugin_name.capitalize)
+plugin_class.new(ARGV.shift).execute
