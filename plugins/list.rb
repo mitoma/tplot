@@ -1,7 +1,5 @@
 class Tplot::List < Tplot::Plugin
 
-  description "list installed plugins."
-
   def execute
     # builtin plugin.
     puts "-- builtin plugins --"
@@ -22,4 +20,10 @@ class Tplot::List < Tplot::Plugin
     plugin_class = Tplot.const_get(name.capitalize)
     puts "tplot #{name}\t: #{plugin_class.description}"
   end
+
+  description "list installed plugins."
+  help <<-END
+Usage: tplot list
+list installed plugins.
+END
 end

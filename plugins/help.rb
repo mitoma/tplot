@@ -1,7 +1,5 @@
 class Tplot::Help < Tplot::Plugin
 
-  description "print plugins help."
-
   def execute
     plugin_name = ARGV.shift
     if File.exists?("#{PLUGIN_DIR}/#{plugin_name}.rb")
@@ -12,6 +10,7 @@ class Tplot::Help < Tplot::Plugin
       print_help("#{PLUGIN_DIR}/#{plugin_name}.rb", USER_PLUGIN_DIR)
       exit 0
     end    
+    puts "#{plugin_name} is not installed."
   end
 
   def print_help(plugin_path, dir)
@@ -21,4 +20,10 @@ class Tplot::Help < Tplot::Plugin
     return puts plugin_class.help.call if plugin_class.help.is_a? Proc
     return puts plugin_class.help
   end
+
+  description "print plugins help."
+  help <<-END
+Usage: tplot help [plugin_name]
+print plugin's help.
+END
 end
