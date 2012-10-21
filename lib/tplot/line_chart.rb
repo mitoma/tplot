@@ -59,26 +59,11 @@ module Tplot
         break unless data
         data.each_with_index do |value, idx|
           setpos(calc_position(value), col)
-          v = calc_mapping_value(value)
           attron(color_pair(COLORS[idx % COLORS.size])|A_NORMAL) do
-            addstr(print_char(v))
+            addstr("*")
           end
         end
       end
-    end
-
-    def print_char(v)
-      if v.even?
-        return "_"
-      else
-        return "-"
-      end
-    end
-
-    def calc_mapping_value(value)
-      range = (@max_value - @min_value).abs
-      ratio = (value - @min_value).abs.to_f / range.to_f
-      (@height * ratio * 2).to_i
     end
 
     def calc_position(value)
@@ -89,13 +74,13 @@ module Tplot
 
     def draw_frame_pre
       setpos(calc_position(@max_value), 0)
-      addstr(print_char(calc_mapping_value(@max_value)) * (@width + 1))
+      addstr("-" * (@width + 1))
 
       setpos(calc_position(0), 0)
-      addstr(print_char(calc_mapping_value(0)) * (@width + 1))
+      addstr("-" * (@width + 1))
 
       setpos(calc_position(@min_value), 0)
-      addstr(print_char(calc_mapping_value(@min_value)) * (@width + 1))
+      addstr("-" * (@width + 1))
     end
 
     def draw_frame_post

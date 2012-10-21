@@ -70,26 +70,11 @@ module Tplot
           (min..max).each do |line|
             setpos(line, col)
             attron(color_pair(COLORS[idx % COLORS.size])|A_NORMAL) do
-              addstr(" ")
+              addstr("*")
             end
           end
         end
       end
-    end
-
-    def print_char(v)
-      if v.even?
-        return "_"
-      else
-        return "-"
-      end
-    end
-
-    def calc_mapping_value(value)
-      range = (@max_value - @min_value).abs
-      return 0 if range == 0
-      ratio = (value - @min_value).abs.to_f / range.to_f
-      (@height * ratio * 2).to_i
     end
 
     def calc_position(value)
@@ -102,13 +87,13 @@ module Tplot
 
     def draw_frame_pre
       setpos(calc_position(@max_value), 0)
-      addstr(print_char(calc_mapping_value(@max_value)) * (@width + 1))
+      addstr("-" * (@width + 1))
 
       setpos(calc_position(0), 0)
-      addstr(print_char(calc_mapping_value(0)) * (@width + 1))
+      addstr("-" * (@width + 1))
 
       setpos(calc_position(@min_value), 0)
-      addstr(print_char(calc_mapping_value(@min_value)) * (@width + 1))
+      addstr("-" * (@width + 1))
     end
 
     def draw_frame_post
@@ -132,7 +117,7 @@ module Tplot
 
     def init_colors
       COLORS.each_with_index do |col,idx|
-        init_pair(col, COLOR_BLACK, col)
+        init_pair(col, col, COLOR_BLACK)
       end
     end
   end
