@@ -4,9 +4,9 @@ require File.expand_path('../lib/tplot/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Mitoma Ryo"]
   gem.email         = ["mutetheradio@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{Tplot is text base graph plot tool.}
+  gem.summary       = %q{Tplot is text base graph plot tool.}
+  gem.homepage      = "https://github.com/mitoma/tplot"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

@@ -1,6 +1,6 @@
 # Tplot
 
-TODO: Write a gem description
+Tplot is text base graph plot tool.
 
 ## Installation
 
@@ -18,7 +18,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+List useful plugin list
+
+    $ tplot list
 
 ## Contributing
 
