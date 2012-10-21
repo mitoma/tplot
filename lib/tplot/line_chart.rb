@@ -68,6 +68,7 @@ module Tplot
 
     def calc_position(value)
       range = (@max_value - @min_value).abs
+      return 0 if range == 0
       ratio = (value - @min_value).abs.to_f / range.to_f
       (@height * (1 - ratio)).to_i
     end
