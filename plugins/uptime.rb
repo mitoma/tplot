@@ -29,6 +29,7 @@ class Tplot::Uptime < Tplot::Plugin
     while true
       uptime = `uptime`.gsub(/^.*load average: /, "").split(",").map{|v| v.strip.to_f}
       chart.add(uptime)
+      chart.draw
       sleep @options[:delay]
     end
   end

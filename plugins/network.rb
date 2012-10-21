@@ -9,6 +9,7 @@ class Tplot::Network < Tplot::Plugin
       inoctet ||= values.first
       outoctet ||= values.last
       chart.add([values.first - inoctet, values.last - outoctet])
+      chart.draw
       inoctet, outoctet = values.first, values.last
       sleep 1
     end

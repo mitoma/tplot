@@ -22,13 +22,11 @@ module Tplot
     def add(values)
       @datas.push(values)
       @datas.shift if @datas.size > limit
-      draw
     end
 
     def update(values)
       @datas.pop
       @datas.push(values)
-      draw
     end
 
     def draw
