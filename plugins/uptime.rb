@@ -3,7 +3,7 @@ class Tplot::Uptime < Tplot::Plugin
   description "plot uptime commands result"
 
   def execute
-    chart = Tplot::LineChart.new
+    chart = Tplot::BarChart.new
     chart.labels = %w(1min 5min 15min)
     
     while true

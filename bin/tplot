@@ -8,6 +8,15 @@ end
 BASE_DIR = File.expand_path(__FILE__.gsub(%r{/[^/]+\z},'') + "/../")
 plugin_name = ARGV.first.nil? ? "list" : ARGV.first
 
+# debug setting
+require 'logger'
+if ENV['DEBUG'] == 'true'
+  LOGGER = Logger.new("#{BASE_DIR}/log/debug.log", "daily")
+  LOGGER.level = Logger::DEBUG
+else
+  LOGGER = Logger.new("/dev/null")
+end
+
 # plugin check
 unless File.exists?("#{BASE_DIR}/plugins/#{plugin_name}.rb")
   puts "#{plugin_name} plugin is not found."
@@ -20,6 +29,7 @@ require 'curses'
 require "#{BASE_DIR}/lib/tplot"
 require "#{BASE_DIR}/lib/tplot/plugin"
 require "#{BASE_DIR}/lib/tplot/line_chart"
+require "#{BASE_DIR}/lib/tplot/bar_chart"
 
 # execute plugin
 require "#{BASE_DIR}/plugins/#{plugin_name}"
