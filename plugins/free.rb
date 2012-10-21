@@ -1,10 +1,8 @@
 class Tplot::Free < Tplot::Plugin
 
-  description "plot free commands result"
-
   def execute
     chart = Tplot::BarChart.new
-    chart.labels = %w(total used free shared buffers cached)
+    chart.labels = [" total ", " used  "]
     
     while true
       uptime = `free | grep Mem`.gsub(/^Mem:/, "").split(" ").map{|v| v.strip.to_f}
@@ -12,4 +10,7 @@ class Tplot::Free < Tplot::Plugin
       sleep 1
     end
   end
+
+  description "plot free commands result"
+  help "Usage: tplot free"
 end

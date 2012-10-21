@@ -33,6 +33,7 @@ if(!File.exists?("#{PLUGIN_DIR}/#{plugin_name}.rb") and
 end
 
 # load basic module
+require 'optparse'
 require 'curses'
 require "#{BASE_DIR}/lib/tplot"
 require "#{BASE_DIR}/lib/tplot/plugin"

@@ -1,7 +1,5 @@
 class Tplot::Network < Tplot::Plugin
 
-  description "plot InOctets/OutOctets"
-
   def execute
     chart = Tplot::BarChart.new
     chart.labels = %w(InOctets OutOctets)
@@ -15,4 +13,7 @@ class Tplot::Network < Tplot::Plugin
       sleep 1
     end
   end
+
+  description "plot InOctets/OutOctets"
+  help "Usage: tplot network"
 end
