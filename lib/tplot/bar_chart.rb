@@ -89,13 +89,16 @@ module Tplot
 
     def calc_mapping_value(value)
       range = (@max_value - @min_value).abs
+      return 0 if range == 0
       ratio = (value - @min_value).abs.to_f / range.to_f
       (@height * ratio * 2).to_i
     end
 
     def calc_position(value)
       range = (@max_value - @min_value).abs
+      return 0 if range == 0
       ratio = (value - @min_value).abs.to_f / range.to_f
+      LOGGER.debug "#{range}:#{ratio}"
       (@height * (1 - ratio)).to_i
     end
 

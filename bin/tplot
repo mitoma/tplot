@@ -6,7 +6,14 @@ trap(:INT) do
 end
 
 BASE_DIR = File.expand_path(__FILE__.gsub(%r{/[^/]+\z},'') + "/../")
-plugin_name = ARGV.first.nil? ? "list" : ARGV.first
+plugin_name = ARGV.shift
+plugin_name ||= "list"
+
+PLUGIN_DIR      = "#{BASE_DIR}/plugins"
+USER_PLUGIN_DIR = "#{ENV['HOME']}/.tplot/plugins"
+
+require 'fileutils'
+FileUtils.mkdir_p(USER_PLUGIN_DIR)
 
 # debug setting
 require 'logger'
@@ -18,7 +25,8 @@ else
 end
 
 # plugin check
-unless File.exists?("#{BASE_DIR}/plugins/#{plugin_name}.rb")
+if(!File.exists?("#{PLUGIN_DIR}/#{plugin_name}.rb") and
+   !File.exists?("#{USER_PLUGIN_DIR}/#{plugin_name}.rb"))
   puts "#{plugin_name} plugin is not found."
   puts
   plugin_name = "list"
@@ -34,4 +42,4 @@ require "#{BASE_DIR}/lib/tplot/bar_chart"
 # execute plugin
 require "#{BASE_DIR}/plugins/#{plugin_name}"
 plugin_class = Tplot.const_get(plugin_name.capitalize)
-plugin_class.new(ARGV.shift).execute
+plugin_class.new.execute

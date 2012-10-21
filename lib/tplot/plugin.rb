@@ -1,8 +1,4 @@
 class Tplot::Plugin
-  def initialize(args = [])
-    @args = args
-  end
-
   def self.description(description = "")
     @@descriptions ||= {}
     @@descriptions[self] = description if !description.nil? and !description.empty?
