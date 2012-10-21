@@ -1,1 +1,5 @@
-module Tplot ; end
+require "tplot/version"
+
+module Tplot
+  # noop
+end
