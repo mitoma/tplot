@@ -14,4 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "tplot"
   gem.require_paths = ["lib"]
   gem.version       = Tplot::VERSION
+
+  gem.add_runtime_dependency "curses"
 end
